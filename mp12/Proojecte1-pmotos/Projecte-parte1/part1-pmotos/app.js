@@ -29,7 +29,8 @@ const main = async () => {
     switch (opt) {
       case "1":
         const nomTasca = await novaTasca("Nova tasca:");
-        tasques.crearTasca(nomTasca);
+        const comp = null;
+        tasques.crearTasca(nomTasca, comp);
         break;
       case "2":
         tasques.llistarTasques();
@@ -42,6 +43,7 @@ const main = async () => {
         break;
       case "5":
         const id1 = await tasquesSelect(tasques.llistatArr);
+        tasques.toggleCompletadas(id1);
         break;
       case "6":
         const id2 = await ts(tasques.llistatArr);

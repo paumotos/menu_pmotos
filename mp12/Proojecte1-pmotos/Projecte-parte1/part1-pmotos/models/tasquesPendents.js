@@ -8,8 +8,8 @@ class TasquesPendents {
   get llistatArr() {
     const llistat = [];
     Object.keys(this._llista).forEach((key) => {
-      const tasca = this._llista[key];
-      llistat.push(tasca);
+      const t = this._llista[key];
+      llistat.push(t);
     });
 
     return llistat;
@@ -19,9 +19,9 @@ class TasquesPendents {
     this._llista = {};
   }
 
-  crearTasca(nom = "") {
-    const tasca = new tasca(nom);
-    this._llista[tasca.id] = tasca;
+  crearTasca(nom = "", completada) {
+    const t = new tasca(nom, completada);
+    this._llista[t.id] = t;
   }
 
   llistarTasques() {
@@ -31,7 +31,7 @@ class TasquesPendents {
     this.llistatArr.forEach((tasca) => {
       const { nom, completada } = tasca;
       conta += 1;
-      console.log(`${(conta + ".").green} ${nom.cyan} ${completada}`);
+      console.log(`${(conta + ".").green} ${nom.cyan}`);
     });
   }
 
@@ -45,7 +45,7 @@ class TasquesPendents {
     console.log(); //soc un salt de linea
     let conta = 0;
     this.llistatArr.forEach((tasca) => {
-      if (tasca.completada == true) {
+      if (tasca.completada == 0) {
         const { nom } = tasca;
         conta += 1;
         console.log(`${(conta + ".").green} ${nom}`);
@@ -60,7 +60,7 @@ class TasquesPendents {
     console.log(); //soc un salt de linea
     let conta = 0;
     this.llistatArr.forEach((tasca) => {
-      if (tasca.completada == false) {
+      if (tasca.completada == null) {
         const { nom } = tasca;
         conta += 1;
         console.log(`${(conta + ".").green} ${nom}`);
@@ -75,15 +75,15 @@ class TasquesPendents {
     // Posem els completats
     ids.forEach((id) => {
       const t = this._llista[id];
-      if (!t.completada) {
-        this._llista[id].completada = true;
+      if (t.completada == null) {
+        this._llista[t.id].completada = "0";
       }
     });
 
     // Posem null als que no
-    this.llistatArr.forEach((Tasca) => {
-      if (!ids.includes(Tasca.id)) {
-        this._llista[tasca.id].completada = false;
+    this.llistatArr.forEach((t) => {
+      if (!ids.includes(t.id)) {
+        this._llista[t.id].completada = null;
       }
     });
   }
